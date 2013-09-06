@@ -4,10 +4,10 @@ require 'raspberry'
 require 'capistrano-helpers'
 
 set :application, 'raspberrypi-chef-solo'
-set :repository,  'git://github.com/andrzejsliwa/raspberrypi-chef-solo.git'
+set :repository,  'git@github.com:jbtrask/raspberrypi-chef-solo.git'
 set :branch,      'master'
 
-server 'pi.andrzejsliwa.com', :raspberry
+server '192.168.0.14', :raspberry
 
 set :user,      'pi'
 
@@ -16,7 +16,7 @@ set :rasp_pi, Raspberry.new(
   chef_version: '11.2.0',
   chef_dir:     'chef',
   chef_role:    'pi',
-  noip_account: 'andrzej.sliwa@i-tool.eu',
+  noip_account: 'fake@spam.com',
   pi:           find_servers(roles: :raspberry)[0]
 )
 
@@ -59,4 +59,5 @@ namespace :pi do
   task :ssh do
     exec "ssh #{user}@#{find_servers(roles: :raspberry)[0]}"
   end
+
 end
